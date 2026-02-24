@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(ls -la \"G:\\\\Developer Projects 2025\\\\BackOfficeSystem-Luna\\\\back\"\" | grep -E \"^- \")",
+      "Bash(ls -la \"G:\\\\Developer Projects 2025\\\\Eleven\\\\front\\\\app\\\\\\(authenticated\\)\")",
+      "Bash(find \"G:\\\\Developer Projects 2025\\\\Eleven\\\\back\\\\src\" -name \"*.controller.ts\" -exec wc -l {} +)"
+    ]
+  }
+}
