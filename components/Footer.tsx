@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { InstagramIcon, WhatsappIcon } from '@/components/icons'
+import { InstagramIcon, LinkedinIcon, WhatsappIcon } from '@/components/icons'
 import { WA_GENERAL } from '@/lib/whatsapp'
 
 const navMusico = [
@@ -117,9 +117,20 @@ export default function Footer() {
           <p className="text-xs text-brand-textSecondary font-sans">
             © {year} Santiago Samuel · Santa Fe, Argentina
           </p>
-          <p className="text-xs text-brand-textSecondary font-sans">
-            Hecho con Next.js · Esta página la hice yo mismo.
-          </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.linkedin.com/in/santriv06/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-textSecondary hover:text-brand-gold transition-colors duration-150"
+              aria-label="LinkedIn de Santiago Samuel"
+            >
+              <LinkedinIcon className="w-4 h-4" />
+            </a>
+            <p className="text-xs text-brand-textSecondary font-sans">
+              Hecho con Next.js · Esta página la hice yo mismo.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

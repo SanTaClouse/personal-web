@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { GithubIcon, ExternalLinkIcon, ArrowRightIcon } from '@/components/icons'
+import { GithubIcon, LinkedinIcon, ExternalLinkIcon, ArrowRightIcon } from '@/components/icons'
 
 export const metadata: Metadata = {
   title: 'Portfolio Técnico — Stack, Proyectos y CV | Santiago Samuel',
@@ -148,6 +148,15 @@ export default function PortfolioPage() {
             >
               <GithubIcon className="w-4 h-4" />
               GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/santriv06/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-brand-border text-brand-textSecondary font-sans font-semibold text-sm py-3 px-6 rounded-md hover:border-brand-gold hover:text-brand-textPrimary transition-all duration-200"
+            >
+              <LinkedinIcon className="w-4 h-4" />
+              LinkedIn
             </a>
           </div>
         </div>
