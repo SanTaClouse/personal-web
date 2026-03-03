@@ -3,6 +3,7 @@ import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 // ─── Fuentes ─────────────────────────────────────────────────────────────────
 
@@ -121,6 +122,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   )
