@@ -123,6 +123,84 @@ const sitios: Proyecto[] = [
   },
 ]
 
+function ProyectoCard({ p }: { p: Proyecto }) {
+  const isExternal = !!p.externo
+  const Wrapper = isExternal ? 'a' : Link
+  const wrapperProps = isExternal
+    ? { href: p.href, target: '_blank', rel: 'noopener noreferrer' }
+    : { href: p.href }
+
+  return (
+    <Wrapper
+      {...(wrapperProps as { href: string })}
+      className="group grid grid-cols-1 md:grid-cols-5 overflow-hidden rounded-xl border border-brand-border bg-brand-bgPrimary hover:border-brand-gold transition-all duration-250 hover:-translate-y-0.5 shadow-gold"
+    >
+      {/* Imagen o placeholder */}
+      <div className="md:col-span-2 relative aspect-[4/3] md:aspect-auto overflow-hidden">
+        {p.imagen ? (
+          <>
+            <Image
+              src={p.imagen}
+              alt={p.titulo}
+              fill
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+            <div className="absolute inset-0 bg-brand-bgDeep/20" />
+          </>
+        ) : (
+          <div className="w-full h-full bg-brand-bgDeep flex items-center justify-center min-h-[160px]">
+            <span className="font-mono-brand text-brand-textSecondary/30 text-xs">preview próximamente</span>
+          </div>
+        )}
+      </div>
+
+      {/* Contenido */}
+      <div className="md:col-span-3 p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <span className="badge">{p.tipo}</span>
+            {p.enDesarrollo && (
+              <span className="font-mono-brand text-xs text-brand-gold border border-brand-gold/40 bg-brand-gold/10 px-2 py-0.5 rounded-full">
+                ⚡ En desarrollo
+              </span>
+            )}
+          </div>
+          <h3 className="font-playfair text-2xl font-bold text-brand-textPrimary mb-1">{p.titulo}</h3>
+          <p className="font-sans text-brand-gold text-sm mb-4">{p.subtitulo}</p>
+          <p className="font-sans text-brand-textSecondary leading-relaxed mb-5">{p.descripcion}</p>
+          <div className="flex flex-wrap gap-2 mb-5">
+            {p.stack.map((tech) => (
+              <span key={tech} className="font-mono-brand text-xs text-brand-textSecondary bg-brand-bgSecondary border border-brand-border px-3 py-1 rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          {p.linkSitio && (
+            <span className="inline-flex items-center gap-1.5 text-sm text-brand-gold font-sans font-semibold">
+              <ExternalLinkIcon className="w-4 h-4" />
+              Ver sitio
+            </span>
+          )}
+          {p.linkCodigo && (
+            <span className="inline-flex items-center gap-1.5 text-sm text-brand-textSecondary font-sans font-semibold">
+              <GithubIcon className="w-4 h-4" />
+              Ver código
+            </span>
+          )}
+          {!isExternal && (
+            <span className="inline-flex items-center gap-1.5 text-brand-gold font-sans font-semibold text-sm group-hover:gap-3 transition-all duration-200">
+              Ver case study <ArrowRightIcon className="w-4 h-4" />
+            </span>
+          )}
+        </div>
+      </div>
+    </Wrapper>
+  )
+}
+
 export default function DesarrolladorPage() {
   return (
     <>
@@ -229,86 +307,35 @@ async function construir(proyecto) {
       {/* ── PROYECTOS ─────────────────────────────────────────────────────── */}
       <section className="bg-brand-bgSecondary border-y border-brand-border py-16 md:py-24">
         <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12">
-          <div className="mb-10 md:mb-14">
-            <span className="badge">Proyectos</span>
-            <GoldDivider />
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-brand-textPrimary mt-5">
-              Lo que construí
-            </h2>
+
+          {/* Sistemas */}
+          <div className="mb-16">
+            <div className="mb-10 md:mb-12">
+              <span className="badge">Sistemas y plataformas</span>
+              <GoldDivider />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-brand-textPrimary mt-5">
+                Lo que construí
+              </h2>
+            </div>
+            <div className="flex flex-col gap-6">
+              {sistemas.map((p) => <ProyectoCard key={p.titulo} p={p} />)}
+            </div>
           </div>
 
-          <div className="flex flex-col gap-8">
-            {proyectos.map((p) => {
-              const Wrapper = p.externo ? 'a' : Link
-              const wrapperProps = p.externo
-                ? { href: p.href, target: '_blank', rel: 'noopener noreferrer' }
-                : { href: p.href }
-
-              return (
-                <Wrapper
-                  key={p.titulo}
-                  {...(wrapperProps as { href: string })}
-                  className="group grid grid-cols-1 md:grid-cols-5 overflow-hidden rounded-xl border border-brand-border bg-brand-bgPrimary hover:border-brand-gold transition-all duration-250 hover:-translate-y-0.5 shadow-gold"
-                >
-                  {/* Imagen */}
-                  <div className="md:col-span-2 relative aspect-[4/3] md:aspect-auto overflow-hidden">
-                    <Image
-                      src={p.imagen}
-                      alt={p.titulo}
-                      fill
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                    />
-                    <div className="absolute inset-0 bg-brand-bgDeep/20" />
-                  </div>
-
-                  {/* Contenido */}
-                  <div className="md:col-span-3 p-6 md:p-8 flex flex-col justify-between">
-                    <div>
-                      <span className="badge mb-3 inline-block">{p.tipo}</span>
-                      <h3 className="font-playfair text-2xl font-bold text-brand-textPrimary mb-1">
-                        {p.titulo}
-                      </h3>
-                      <p className="font-sans text-brand-gold text-sm mb-4">{p.subtitulo}</p>
-                      <p className="font-sans text-brand-textSecondary leading-relaxed mb-5">
-                        {p.descripcion}
-                      </p>
-
-                      {/* Stack */}
-                      <div className="flex flex-wrap gap-2 mb-5">
-                        {p.stack.map((tech) => (
-                          <span key={tech} className="font-mono-brand text-xs text-brand-textSecondary bg-brand-bgSecondary border border-brand-border px-3 py-1 rounded-full">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Links */}
-                    <div className="flex flex-wrap gap-3">
-                      {p.linkSitio && (
-                        <span className="inline-flex items-center gap-1.5 text-sm text-brand-gold font-sans font-semibold">
-                          <ExternalLinkIcon className="w-4 h-4" />
-                          Ver sitio
-                        </span>
-                      )}
-                      {p.linkCodigo && (
-                        <span className="inline-flex items-center gap-1.5 text-sm text-brand-textSecondary font-sans font-semibold hover:text-brand-textPrimary transition-colors">
-                          <GithubIcon className="w-4 h-4" />
-                          Ver código
-                        </span>
-                      )}
-                      {!p.linkSitio && !p.linkCodigo && (
-                        <span className="inline-flex items-center gap-1.5 text-brand-gold font-sans font-semibold text-sm group-hover:gap-3 transition-all duration-200">
-                          Ver case study <ArrowRightIcon className="w-4 h-4" />
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Wrapper>
-              )
-            })}
+          {/* Sitios */}
+          <div>
+            <div className="mb-10 md:mb-12">
+              <span className="badge">Sitios web y landing pages</span>
+              <GoldDivider />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-brand-textPrimary mt-5">
+                Diseño y conversión
+              </h2>
+            </div>
+            <div className="flex flex-col gap-6">
+              {sitios.map((p) => <ProyectoCard key={p.titulo} p={p} />)}
+            </div>
           </div>
+
         </div>
       </section>
 
