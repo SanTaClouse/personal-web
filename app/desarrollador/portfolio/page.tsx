@@ -68,7 +68,22 @@ const nivelColor: Record<string, string> = {
 
 // ─── Proyectos ─────────────────────────────────────────────────────────────────
 
-const proyectos = [
+type Proyecto = {
+  href: string
+  titulo: string
+  tipo: string
+  subtitulo: string
+  descripcion: string
+  stack: string[]
+  destacado: string[]
+  linkSitio: string | null
+  linkCodigo: string | null
+  badge: string | null
+  externo?: boolean
+  enDesarrollo?: boolean
+}
+
+const sistemas: Proyecto[] = [
   {
     href: '/desarrollador/eleven',
     titulo: 'Eleven Ascensores',
@@ -94,6 +109,59 @@ const proyectos = [
     badge: null,
   },
   {
+    href: '/desarrollador/liftmanager',
+    titulo: 'LiftManager',
+    tipo: 'SaaS B2B · Vertical',
+    subtitulo: 'Plataforma de mantenimiento de ascensores — Argentina',
+    descripcion: 'SaaS vertical para empresas de ascensores: panel admin, portal QR para técnicos, portal de autoservicio para consorcios, reporte de fallas públicas y facturación electrónica AFIP automática.',
+    stack: ['NestJS', 'React', 'PostgreSQL', 'TypeScript', 'AFIP/ARCA', 'Multi-tenant'],
+    destacado: ['QR dual-contexto: técnico y vecino', 'Notificaciones post-visita auditables', 'Modelo multi-tenant nativo'],
+    linkSitio: 'https://www.liftmanager.app/',
+    linkCodigo: null,
+    badge: null,
+    enDesarrollo: true,
+  },
+]
+
+const sitios: Proyecto[] = [
+  {
+    href: '/desarrollador/tr1bu',
+    titulo: 'TR1BU',
+    tipo: 'Portfolio web · Artista',
+    subtitulo: 'DJ de techno — Copenhagen, Dinamarca',
+    descripcion: 'Sitio web bilingüe (inglés/español) con identidad visual dark/minimalista para artista de techno. SEO con schema MusicGroup, routing dinámico por idioma, Cloudinary y embeds de Spotify, YouTube y SoundCloud.',
+    stack: ['Next.js 14', 'React 18', 'TypeScript', 'Tailwind CSS', 'Cloudinary'],
+    destacado: ['Routing bilingüe sin i18n externo', 'Schema MusicGroup para SEO', 'Cloudinary CDN con Next.js Image'],
+    linkSitio: 'https://tr1bu.com',
+    linkCodigo: 'https://github.com/SanTaClouse/tr1bu',
+    badge: null,
+    externo: false,
+  },
+  {
+    href: '/desarrollador/immaculate',
+    titulo: 'Immaculate Pro Painting',
+    tipo: 'Landing page · Conversión',
+    subtitulo: 'Empresa de pintura premium — Seattle, WA',
+    descripcion: 'Landing page luxury dark para empresa de pintura residencial y comercial premium. Before/after sliders interactivos, scroll reveal con IntersectionObserver, floating CTAs y cero dependencias.',
+    stack: ['HTML5', 'CSS3', 'JavaScript vanilla', 'Zero deps'],
+    destacado: ['Before/After sliders con clip-path', 'Identidad luxury dark', 'Archivo único sin build tools'],
+    linkSitio: 'https://project-eiq6t.vercel.app/',
+    linkCodigo: null,
+    badge: null,
+  },
+  {
+    href: '/desarrollador/quintal',
+    titulo: 'Quintal',
+    tipo: 'Catálogo · SPA con carrito',
+    subtitulo: 'Distribuidor de frutos secos premium — Buenos Aires',
+    descripcion: 'Catálogo interactivo con selector de gramaje y precio dinámico. El pedido se genera automáticamente como mensaje de WhatsApp estructurado. React SPA sin backend ni registro requerido.',
+    stack: ['React 19', 'Vite', 'TypeScript', 'Tailwind CSS', 'WhatsApp API'],
+    destacado: ['WhatsApp como canal de checkout', 'Precio calculado por gramaje', 'Filtrado memoizado por categoría'],
+    linkSitio: 'https://quintal-demo-spa.vercel.app/',
+    linkCodigo: null,
+    badge: null,
+  },
+  {
     href: 'https://github.com/SanTaClouse/HRTF-Studio',
     titulo: 'HRTF Studio',
     tipo: 'Aplicación desktop',
@@ -107,6 +175,77 @@ const proyectos = [
     externo: true,
   },
 ]
+
+// ─── ProyectoCard ──────────────────────────────────────────────────────────────
+
+function ProyectoCard({ p }: { p: Proyecto }) {
+  const isExternal = !!p.externo
+  const Wrapper = isExternal ? 'a' : Link
+  const wrapperProps = isExternal
+    ? { href: p.href, target: '_blank', rel: 'noopener noreferrer' }
+    : { href: p.href }
+
+  return (
+    <Wrapper
+      {...(wrapperProps as { href: string })}
+      className={`group rounded-xl border bg-brand-bgPrimary transition-all duration-250 hover:-translate-y-0.5 ${
+        p.badge ? 'border-brand-gold shadow-gold-lg' : 'border-brand-border hover:border-brand-gold shadow-gold'
+      }`}
+    >
+      <div className="p-6 md:p-8">
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <span className="badge">{p.tipo}</span>
+          {p.badge && <span className="badge">{p.badge}</span>}
+          {p.enDesarrollo && (
+            <span className="font-mono-brand text-xs text-brand-gold border border-brand-gold/40 bg-brand-gold/10 px-2 py-0.5 rounded-full">
+              ⚡ En desarrollo
+            </span>
+          )}
+        </div>
+
+        <h3 className="font-playfair text-2xl font-bold text-brand-textPrimary mb-1">{p.titulo}</h3>
+        <p className="font-sans text-brand-gold text-sm mb-4">{p.subtitulo}</p>
+        <p className="font-sans text-brand-textSecondary leading-relaxed mb-5">{p.descripcion}</p>
+
+        <div className="flex flex-wrap gap-2 mb-5">
+          {p.destacado.map((d) => (
+            <span key={d} className="font-sans text-xs text-brand-textSecondary bg-brand-bgSecondary border border-brand-border px-3 py-1 rounded-full">
+              ✓ {d}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-5">
+          {p.stack.map((tech) => (
+            <span key={tech} className="font-mono-brand text-xs text-brand-textSecondary bg-brand-bgSecondary border border-brand-border px-3 py-1 rounded-full">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          {p.linkSitio && (
+            <span className="inline-flex items-center gap-1.5 text-sm text-brand-gold font-sans font-semibold">
+              <ExternalLinkIcon className="w-4 h-4" />
+              Ver sitio
+            </span>
+          )}
+          {p.linkCodigo && (
+            <span className="inline-flex items-center gap-1.5 text-sm text-brand-textSecondary font-sans font-semibold">
+              <GithubIcon className="w-4 h-4" />
+              Ver código
+            </span>
+          )}
+          {!isExternal && (
+            <span className="inline-flex items-center gap-1.5 text-brand-gold font-sans font-semibold text-sm group-hover:gap-3 transition-all duration-200">
+              Ver case study <ArrowRightIcon className="w-4 h-4" />
+            </span>
+          )}
+        </div>
+      </div>
+    </Wrapper>
+  )
+}
 
 export default function PortfolioPage() {
   return (
@@ -162,6 +301,41 @@ export default function PortfolioPage() {
         </div>
       </section>
 
+      {/* ── PROYECTOS ─────────────────────────────────────────────────────── */}
+      <section className="bg-brand-bgSecondary border-y border-brand-border py-16 md:py-24">
+        <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12">
+
+          {/* Sistemas y plataformas */}
+          <div className="mb-16">
+            <div className="mb-10">
+              <span className="badge">Sistemas y plataformas</span>
+              <GoldDivider />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-brand-textPrimary mt-5">
+                Full-stack · Backend · Base de datos
+              </h2>
+            </div>
+            <div className="flex flex-col gap-6">
+              {sistemas.map((p) => <ProyectoCard key={p.titulo} p={p} />)}
+            </div>
+          </div>
+
+          {/* Sitios web y landing pages */}
+          <div>
+            <div className="mb-10">
+              <span className="badge">Sitios web y landing pages</span>
+              <GoldDivider />
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-brand-textPrimary mt-5">
+                Frontend · Diseño · Conversión
+              </h2>
+            </div>
+            <div className="flex flex-col gap-6">
+              {sitios.map((p) => <ProyectoCard key={p.titulo} p={p} />)}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       {/* ── STACK TÉCNICO ─────────────────────────────────────────────────── */}
       <section className="bg-brand-bgPrimary py-16 md:py-24">
         <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12">
@@ -202,136 +376,32 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── PROYECTOS ─────────────────────────────────────────────────────── */}
-      <section className="bg-brand-bgSecondary border-y border-brand-border py-16 md:py-24">
+      {/* ── ENFOQUE ───────────────────────────────────────────────────────── */}
+      <section className="bg-brand-bgSecondary border-t border-brand-border py-16 md:py-24">
         <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12">
-          <div className="mb-10 md:mb-14">
-            <span className="badge">Proyectos</span>
+          <div className="mb-8">
+            <span className="badge">Enfoque</span>
             <GoldDivider />
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-brand-textPrimary mt-5">
-              En producción
-            </h2>
           </div>
-
-          <div className="flex flex-col gap-8">
-            {proyectos.map((p) => {
-              const isExternal = p.externo
-              const Wrapper = isExternal ? 'a' : Link
-              const wrapperProps = isExternal
-                ? { href: p.href, target: '_blank', rel: 'noopener noreferrer' }
-                : { href: p.href }
-
-              return (
-                <Wrapper
-                  key={p.titulo}
-                  {...(wrapperProps as { href: string })}
-                  className={`group rounded-xl border bg-brand-bgPrimary transition-all duration-250 hover:-translate-y-0.5 ${
-                    p.badge ? 'border-brand-gold shadow-gold-lg' : 'border-brand-border hover:border-brand-gold shadow-gold'
-                  }`}
-                >
-                  <div className="p-6 md:p-8">
-                    <div className="flex flex-wrap items-center gap-3 mb-3">
-                      <span className="badge">{p.tipo}</span>
-                      {p.badge && (
-                        <span className="badge">{p.badge}</span>
-                      )}
-                    </div>
-
-                    <h3 className="font-playfair text-2xl font-bold text-brand-textPrimary mb-1">{p.titulo}</h3>
-                    <p className="font-sans text-brand-gold text-sm mb-4">{p.subtitulo}</p>
-                    <p className="font-sans text-brand-textSecondary leading-relaxed mb-5">{p.descripcion}</p>
-
-                    {/* Highlights */}
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      {p.destacado.map((d) => (
-                        <span key={d} className="font-sans text-xs text-brand-textSecondary bg-brand-bgSecondary border border-brand-border px-3 py-1 rounded-full">
-                          ✓ {d}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Stack */}
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      {p.stack.map((tech) => (
-                        <span key={tech} className="font-mono-brand text-xs text-brand-textSecondary bg-brand-bgSecondary border border-brand-border px-3 py-1 rounded-full">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Links */}
-                    <div className="flex flex-wrap gap-3">
-                      {p.linkSitio && (
-                        <span className="inline-flex items-center gap-1.5 text-sm text-brand-gold font-sans font-semibold">
-                          <ExternalLinkIcon className="w-4 h-4" />
-                          Ver sitio
-                        </span>
-                      )}
-                      {p.linkCodigo && (
-                        <span className="inline-flex items-center gap-1.5 text-sm text-brand-textSecondary font-sans font-semibold hover:text-brand-textPrimary transition-colors">
-                          <GithubIcon className="w-4 h-4" />
-                          Ver código
-                        </span>
-                      )}
-                      {!isExternal && (
-                        <span className="inline-flex items-center gap-1.5 text-brand-gold font-sans font-semibold text-sm group-hover:gap-3 transition-all duration-200">
-                          Ver case study <ArrowRightIcon className="w-4 h-4" />
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Wrapper>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── SOBRE MI ENFOQUE ──────────────────────────────────────────────── */}
-      <section className="bg-brand-bgPrimary py-16 md:py-24">
-        <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12">
-          <div className="max-w-3xl">
-            <div className="mb-8">
-              <span className="badge">Enfoque</span>
-              <GoldDivider />
-            </div>
-            <div className="space-y-4 font-sans text-brand-textSecondary leading-relaxed text-[1.0625rem]">
-              <p>
-                Vengo de la música — doce años trabajando en producción, grabación y arreglos.
-                Eso me enseñó algo que no se aprende en ningún tutorial: a pensar desde el problema
-                real antes de hablar de soluciones.
-              </p>
-              <p>
-                Cuando me meto en un proyecto de desarrollo, lo primero que entiendo es el negocio.
-                Qué hace el cliente, dónde pierde tiempo, qué le cambiaría el día a día.
-                El código viene después.
-              </p>
-              <p className="text-brand-textPrimary font-medium">
-                El resultado es que los sistemas que construyo no son &quot;páginas web&quot; — son herramientas
-                que alguien usa todos los días para trabajar mejor.
-              </p>
-            </div>
-
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {[
-                { emoji: '🏗️', titulo: 'Arquitectura limpia', desc: 'Módulos independientes, responsabilidades separadas, código que se puede mantener.' },
-                { emoji: '🚀', titulo: 'Producción primero', desc: 'Todos mis proyectos están en producción. No practico con proyectos inventados.' },
-                { emoji: '🔗', titulo: 'Integraciones reales', desc: 'ARCA, WhatsApp API, Firebase, PostgreSQL managed. Sistemas que se conectan con el mundo real.' },
-              ].map((item) => (
-                <div key={item.titulo} className="bg-brand-bgSecondary border border-brand-border rounded-xl p-5">
-                  <p className="text-3xl mb-3">{item.emoji}</p>
-                  <h3 className="font-sans font-semibold text-brand-textPrimary mb-1">{item.titulo}</h3>
-                  <p className="font-sans text-brand-textSecondary text-sm">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              { emoji: '🏗️', titulo: 'Arquitectura limpia', desc: 'Módulos independientes, responsabilidades separadas, código que se puede mantener.' },
+              { emoji: '🚀', titulo: 'Producción primero', desc: 'Todos mis proyectos están en producción. No practico con proyectos inventados.' },
+              { emoji: '🔗', titulo: 'Integraciones reales', desc: 'ARCA, WhatsApp API, Firebase, PostgreSQL managed. Sistemas que se conectan con el mundo real.' },
+            ].map((item) => (
+              <div key={item.titulo} className="bg-brand-bgPrimary border border-brand-border rounded-xl p-5">
+                <p className="text-3xl mb-3">{item.emoji}</p>
+                <h3 className="font-sans font-semibold text-brand-textPrimary mb-1">{item.titulo}</h3>
+                <p className="font-sans text-brand-textSecondary text-sm">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA ───────────────────────────────────────────────────────────── */}
-      <section className="bg-brand-bgSecondary border-t border-brand-border py-16 md:py-20">
-        <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12 text-center max-w-2xl mx-auto">
+      <section className="bg-brand-bgPrimary border-t border-brand-border py-16 md:py-20">
+        <div className="max-w-2xl mx-auto px-5 md:px-8 lg:px-12 text-center">
           <h2 className="font-playfair text-3xl font-bold text-brand-textPrimary mb-3">
             ¿Tenés un proyecto en mente?
           </h2>
@@ -348,13 +418,15 @@ export default function PortfolioPage() {
             >
               ↓ Descargar CV
             </a>
-            <Link
-              href="/desarrollador"
+            <a
+              href="https://github.com/SanTaClouse"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-brand-border text-brand-textSecondary font-sans font-semibold text-sm py-3.5 px-7 rounded-md hover:border-brand-gold hover:text-brand-textPrimary transition-all duration-200"
             >
-              Ver proyectos
-              <ArrowRightIcon className="w-4 h-4" />
-            </Link>
+              <GithubIcon className="w-4 h-4" />
+              Ver GitHub
+            </a>
           </div>
         </div>
       </section>

@@ -21,7 +21,21 @@ function GoldDivider({ centered = false }: { centered?: boolean }) {
   return <span className={`block w-14 h-0.5 bg-brand-gold mt-3 ${centered ? 'mx-auto' : ''}`} />
 }
 
-const proyectos = [
+type Proyecto = {
+  href: string
+  titulo: string
+  subtitulo: string
+  descripcion: string
+  stack: string[]
+  tipo: string
+  imagen?: string
+  linkSitio: string | null
+  linkCodigo: string | null
+  externo?: boolean
+  enDesarrollo?: boolean
+}
+
+const sistemas: Proyecto[] = [
   {
     href: '/desarrollador/eleven',
     titulo: 'Eleven Ascensores',
@@ -44,6 +58,54 @@ const proyectos = [
     tipo: 'Web + Sistema admin',
     imagen: '/images/projects/laluna-preview.jpg',
     linkSitio: 'https://laluna123.vercel.app/',
+    linkCodigo: null,
+  },
+  {
+    href: '/desarrollador/liftmanager',
+    titulo: 'LiftManager',
+    subtitulo: 'SaaS B2B · Mantenimiento de ascensores — Argentina',
+    descripcion:
+      'Plataforma SaaS vertical para empresas de ascensores: panel admin, portal QR para técnicos, portal de autoservicio para consorcios, reporte de fallas y facturación electrónica AFIP automática.',
+    stack: ['NestJS', 'React', 'PostgreSQL', 'TypeScript', 'AFIP/ARCA'],
+    tipo: 'SaaS B2B · Vertical',
+    linkSitio: 'https://www.liftmanager.app/',
+    linkCodigo: null,
+    enDesarrollo: true,
+  },
+]
+
+const sitios: Proyecto[] = [
+  {
+    href: '/desarrollador/tr1bu',
+    titulo: 'TR1BU',
+    subtitulo: 'Portfolio web · DJ de techno — Copenhagen, Dinamarca',
+    descripcion:
+      'Sitio web bilingüe (inglés/español) con identidad visual dark/minimalista para artista de techno. SEO con schema MusicGroup, Cloudinary CDN y embeds de Spotify, YouTube y SoundCloud.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Cloudinary'],
+    tipo: 'Portfolio web · Artista',
+    linkSitio: 'https://tr1bu.com',
+    linkCodigo: 'https://github.com/SanTaClouse/tr1bu',
+  },
+  {
+    href: '/desarrollador/immaculate',
+    titulo: 'Immaculate Pro Painting',
+    subtitulo: 'Landing page premium · Seattle, WA',
+    descripcion:
+      'Landing page luxury dark para empresa de pintura residencial y comercial. Before/after sliders interactivos, scroll reveal con IntersectionObserver y cero dependencias de build.',
+    stack: ['HTML5', 'CSS3', 'JavaScript vanilla', 'Zero deps'],
+    tipo: 'Landing page · Conversión',
+    linkSitio: 'https://project-eiq6t.vercel.app/',
+    linkCodigo: null,
+  },
+  {
+    href: '/desarrollador/quintal',
+    titulo: 'Quintal',
+    subtitulo: 'Catálogo con carrito · Buenos Aires, Argentina',
+    descripcion:
+      'Catálogo interactivo de frutos secos con selector de gramaje y precio dinámico. El pedido se genera automáticamente como mensaje de WhatsApp estructurado. Sin backend, sin registro.',
+    stack: ['React', 'Vite', 'TypeScript', 'Tailwind CSS'],
+    tipo: 'Catálogo · SPA con carrito',
+    linkSitio: 'https://quintal-demo-spa.vercel.app/',
     linkCodigo: null,
   },
   {
