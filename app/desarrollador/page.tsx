@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { WhatsappIcon, ArrowRightIcon, GithubIcon, ExternalLinkIcon } from '@/components/icons'
+import { ArrowRightIcon, GithubIcon, ExternalLinkIcon } from '@/components/icons'
 import { WA_DESARROLLO } from '@/lib/whatsapp'
+import GoldDivider from '@/components/GoldDivider'
+import WhatsAppCTA from '@/components/WhatsAppCTA'
 
 export const metadata: Metadata = {
   title: 'Desarrollador Web en Santa Fe | Páginas y Sistemas a Medida',
@@ -15,10 +17,11 @@ export const metadata: Metadata = {
     'desarrollo web freelance Santa Fe',
   ],
   alternates: { canonical: '/desarrollador' },
-}
-
-function GoldDivider({ centered = false }: { centered?: boolean }) {
-  return <span className={`block w-14 h-0.5 bg-brand-gold mt-3 ${centered ? 'mx-auto' : ''}`} />
+  openGraph: {
+    title: 'Desarrollador Web | Santiago Samuel',
+    description: 'Desarrollo de páginas web y sistemas de gestión para negocios en Santa Fe y Argentina.',
+    images: [{ url: '/images/hero/hero-desarrollador.jpg', width: 1200, height: 630, alt: 'Santiago Samuel — Desarrollador Web' }],
+  },
 }
 
 type Proyecto = {
@@ -133,7 +136,7 @@ function ProyectoCard({ p }: { p: Proyecto }) {
   return (
     <Wrapper
       {...(wrapperProps as { href: string })}
-      className="group grid grid-cols-1 md:grid-cols-5 overflow-hidden rounded-xl border border-brand-border bg-brand-bgPrimary hover:border-brand-gold transition-all duration-250 hover:-translate-y-0.5 shadow-gold"
+      className="group grid grid-cols-1 md:grid-cols-5 overflow-hidden rounded-xl border border-brand-border bg-brand-bgPrimary hover:border-brand-gold active:scale-[0.99] active:border-brand-gold transition-all duration-250 hover:-translate-y-0.5 shadow-gold"
     >
       {/* Imagen o placeholder */}
       <div className="md:col-span-2 relative aspect-[4/3] md:aspect-auto overflow-hidden">
@@ -350,15 +353,9 @@ async function construir(proyecto) {
             Hablemos. Entiendo tanto de tecnología como de los problemas reales que tiene un negocio
             porque vengo de afuera del mundo tech — y eso hace la diferencia.
           </p>
-          <a
-            href={WA_DESARROLLO}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-brand-gold text-brand-bgPrimary font-sans font-semibold py-3.5 px-7 rounded-md hover:bg-brand-goldDark transition-colors duration-200"
-          >
-            <WhatsappIcon className="w-5 h-5" />
+          <WhatsAppCTA href={WA_DESARROLLO} variant="gold">
             Escribime por WhatsApp
-          </a>
+          </WhatsAppCTA>
         </div>
       </section>
     </>

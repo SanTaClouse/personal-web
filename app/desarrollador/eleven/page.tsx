@@ -2,16 +2,19 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ExternalLinkIcon } from '@/components/icons'
+import GoldDivider from '@/components/GoldDivider'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Eleven Ascensores — SaaS + Web + QR + Facturación ARCA | Santiago Samuel',
   description:
     'Plataforma SaaS para empresa de mantenimiento de ascensores: landing page SEO, sistema administrativo con dashboard, portal QR para técnicos y facturación electrónica ARCA. Next.js, NestJS, PostgreSQL.',
   alternates: { canonical: '/desarrollador/eleven' },
-}
-
-function GoldDivider() {
-  return <span className="block w-14 h-0.5 bg-brand-gold mt-3" />
+  openGraph: {
+    title: 'Eleven Ascensores — Case Study | Santiago Samuel',
+    description: 'Plataforma SaaS: landing page SEO, sistema admin, portal QR y facturación electrónica ARCA.',
+    images: [{ url: '/images/projects/eleven-preview.jpg', width: 1200, height: 630 }],
+  },
 }
 
 function FeatureCard({ icon, titulo, desc }: { icon: string; titulo: string; desc: string }) {
@@ -87,12 +90,11 @@ export default function ElevenPage() {
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="bg-brand-bgSecondary border-b border-brand-border pt-28 pb-14 md:pt-36 md:pb-20">
         <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12">
-          <Link
-            href="/desarrollador"
-            className="inline-flex items-center gap-1.5 text-brand-textSecondary text-sm font-sans mb-6 hover:text-brand-textPrimary transition-colors duration-150"
-          >
-            ← Desarrollador
-          </Link>
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/' },
+            { label: 'Desarrollador', href: '/desarrollador' },
+            { label: 'Eleven Ascensores' },
+          ]} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>

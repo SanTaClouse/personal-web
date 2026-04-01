@@ -21,7 +21,13 @@ export const metadata: Metadata = {
     description: 'Horn section para tu producción. Rápido, latino y accesible.',
     images: [{ url: '/images/hero/hero-grabaciones.jpg', width: 1200, height: 630 }],
   },
-  alternates: { canonical: '/musico/grabaciones' },
+  alternates: {
+    canonical: '/musico/grabaciones',
+    languages: {
+      'es': '/musico/grabaciones',
+      'en': '/musico/grabaciones/en',
+    },
+  },
 }
 
 const serviceSchema = {
@@ -42,7 +48,7 @@ export default function GrabacionesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
-      <GrabacionesContent />
+      <GrabacionesContent lang="es" />
     </>
   )
 }

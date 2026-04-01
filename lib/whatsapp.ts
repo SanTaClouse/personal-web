@@ -11,7 +11,6 @@ export function whatsappLink(message?: string): string {
 }
 
 export const WA_GRABACIONES = whatsappLink('Hola Santiago, quiero sumarle vientos a mi música.')
-export const WA_TRANSCRIPCIONES = whatsappLink('Hola Santiago, quiero transcribir mi canción para SADAIC.')
 export const WA_CLASES = whatsappLink('Hola Santiago, quiero consultar disponibilidad para clases de piano.')
 export const WA_DESARROLLO = whatsappLink('Hola Santiago, quiero consultarte sobre desarrollo web.')
 export const WA_GENERAL = whatsappLink('Hola Santiago, quiero hacerte una consulta.')

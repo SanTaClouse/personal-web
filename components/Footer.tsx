@@ -1,18 +1,20 @@
 import Link from 'next/link'
 import { InstagramIcon, LinkedinIcon, WhatsappIcon } from '@/components/icons'
 import { WA_GENERAL } from '@/lib/whatsapp'
+import { INSTAGRAM_URL, INSTAGRAM_HANDLE, LINKEDIN_URL } from '@/lib/social'
 
 const navMusico = [
   { href: '/musico/grabaciones', label: 'Grabaciones de Vientos' },
-  { href: '/musico/transcripciones', label: 'Transcripciones' },
   { href: '/musico/clases', label: 'Clases de Piano' },
   { href: '/musico/sergiotorres', label: 'Sergio Torres' },
 ]
 
 const navDesarrollador = [
-  { href: '/desarrollador', label: 'Portfolio' },
+  { href: '/desarrollador', label: 'Proyectos' },
+  { href: '/desarrollador/portfolio', label: 'Portfolio técnico' },
   { href: '/desarrollador/laluna', label: 'La Luna' },
   { href: '/desarrollador/eleven', label: 'Eleven Ascensores' },
+  { href: '/desarrollador/liftmanager', label: 'LiftManager' },
 ]
 
 export default function Footer() {
@@ -31,7 +33,7 @@ export default function Footer() {
             ¿Hablamos?
           </h2>
           <p className="text-brand-textSecondary font-sans mb-8 max-w-md mx-auto">
-            Para consultas sobre grabaciones, transcripciones, clases o desarrollo web. Respondido en menos de 24 horas.
+            Para consultas sobre grabaciones, clases o desarrollo web. Respondido en menos de 24 horas.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
@@ -44,13 +46,13 @@ export default function Footer() {
               Escribime por WhatsApp
             </a>
             <a
-              href="https://www.instagram.com/santi.rivero06/"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-brand-gold text-brand-gold font-sans font-semibold text-sm py-3 px-6 rounded-full hover:bg-brand-gold hover:text-brand-bgPrimary transition-all duration-200"
             >
               <InstagramIcon className="w-4 h-4" />
-              @santi.rivero06
+              {INSTAGRAM_HANDLE}
             </a>
           </div>
         </div>
@@ -119,7 +121,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="https://www.linkedin.com/in/santriv06/"
+              href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-brand-textSecondary hover:text-brand-gold transition-colors duration-150"

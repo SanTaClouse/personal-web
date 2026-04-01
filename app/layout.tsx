@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import { ConditionalHeader, ConditionalFooter } from '@/components/ConditionalLayout'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from "@vercel/analytics/next"
 
@@ -40,14 +39,14 @@ export const metadata: Metadata = {
     template: '%s | Santiago Samuel',
   },
   description:
-    'Músico, trombonista y desarrollador web de Santa Fe, Argentina. Arreglos y grabaciones de vientos, transcripciones para SADAIC y sistemas web para negocios.',
+    'Músico, trombonista y desarrollador web de Santa Fe, Argentina. Arreglos y grabaciones de vientos, clases de piano y sistemas web para negocios.',
   keywords: [
     'Santiago Samuel',
     'músico Santa Fe',
     'trombonista Argentina',
     'grabación de vientos',
     'arreglos de vientos',
-    'transcripción SADAIC',
+    'clases de piano Santa Fe',
     'desarrollador web Santa Fe',
   ],
   authors: [{ name: 'Santiago Samuel', url: baseUrl }],
@@ -58,7 +57,7 @@ export const metadata: Metadata = {
     siteName: 'Santiago Samuel',
     title: 'Santiago Samuel — Músico, Arreglador y Desarrollador Web',
     description:
-      'Músico, trombonista y desarrollador web de Santa Fe, Argentina. Arreglos y grabaciones de vientos, transcripciones para SADAIC y sistemas web para negocios.',
+      'Músico, trombonista y desarrollador web de Santa Fe, Argentina. Arreglos y grabaciones de vientos, clases de piano y sistemas web para negocios.',
     images: [
       {
         url: '/images/hero/hero-home.jpg',
@@ -93,7 +92,11 @@ const personSchema = {
   name: 'Santiago Samuel',
   jobTitle: 'Músico, Arreglador y Desarrollador Web',
   url: baseUrl,
-  sameAs: ['https://www.instagram.com/santi.rivero06/'],
+  sameAs: [
+    'https://www.instagram.com/santi.rivero06/',
+    'https://www.linkedin.com/in/santriv06/',
+    'https://github.com/SanTaClouse',
+  ],
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Santa Fe',
@@ -120,9 +123,15 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-brand-bgPrimary text-brand-textPrimary antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-brand-gold focus:text-brand-bgPrimary focus:px-4 focus:py-2 focus:rounded-md focus:font-sans focus:font-semibold focus:text-sm"
+        >
+          Ir al contenido principal
+        </a>
+        <ConditionalHeader />
+        <main id="main">{children}</main>
+        <ConditionalFooter />
         <SpeedInsights />
         <Analytics />
       </body>

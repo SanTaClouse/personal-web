@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { InstagramIcon, MenuIcon, XIcon, WhatsappIcon } from '@/components/icons'
 import { WA_GENERAL } from '@/lib/whatsapp'
+import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '@/lib/social'
 
 const navLinks = [
   { href: '/musico', label: 'Músico' },
   { href: '/desarrollador', label: 'Desarrollador' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/#contacto', label: 'Contacto' },
 ]
 
 export default function Header() {
@@ -66,21 +67,21 @@ export default function Header() {
 
               {/* Instagram */}
               <a
-                href="https://www.instagram.com/santi.rivero06/"
+                href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-sm font-sans text-brand-gold hover:text-brand-textPrimary transition-colors duration-150"
                 aria-label="Instagram de Santiago Samuel"
               >
                 <InstagramIcon className="w-4 h-4" />
-                <span>@santi.rivero06</span>
+                <span>{INSTAGRAM_HANDLE}</span>
               </a>
             </nav>
 
             {/* Mobile: Instagram + Hamburger */}
             <div className="flex md:hidden items-center gap-3">
               <a
-                href="https://www.instagram.com/santi.rivero06/"
+                href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-brand-gold"
@@ -149,13 +150,13 @@ export default function Header() {
             ))}
 
             <a
-              href="https://www.instagram.com/santi.rivero06/"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-lg font-sans text-brand-gold py-3 border-b border-brand-border/50"
             >
               <InstagramIcon className="w-5 h-5" />
-              @santi.rivero06
+              {INSTAGRAM_HANDLE}
             </a>
           </nav>
 

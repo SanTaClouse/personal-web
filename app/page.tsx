@@ -1,28 +1,23 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { InstagramIcon, WhatsappIcon, ArrowRightIcon } from '@/components/icons'
+import { InstagramIcon, ArrowRightIcon } from '@/components/icons'
 import { WA_GENERAL } from '@/lib/whatsapp'
+import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '@/lib/social'
+import GoldDivider from '@/components/GoldDivider'
+import WhatsAppCTA from '@/components/WhatsAppCTA'
 import BlurText from '@/components/animations/BlurText'
 import FadeIn from '@/components/animations/FadeIn'
+
+// ─── Componentes internos ─────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
   title: 'Santiago Samuel — Músico, Arreglador y Desarrollador Web | Santa Fe',
   description:
-    'Músico, trombonista y desarrollador web de Santa Fe, Argentina. Arreglos y grabaciones de vientos, transcripciones para SADAIC y sistemas web para negocios.',
+    'Músico, trombonista y desarrollador web de Santa Fe, Argentina. Arreglos y grabaciones de vientos, clases de piano y sistemas web para negocios.',
   alternates: {
     canonical: '/',
   },
-}
-
-// ─── Componentes internos ─────────────────────────────────────────────────────
-
-function GoldDivider({ centered = false }: { centered?: boolean }) {
-  return (
-    <span
-      className={`block w-14 h-0.5 bg-brand-gold mt-3 mb-0 ${centered ? 'mx-auto' : ''}`}
-    />
-  )
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -102,7 +97,7 @@ export default function HomePage() {
             <FadeIn delay={0} yOffset={24}>
               <Link
                 href="/musico"
-                className="group relative overflow-hidden rounded-xl border border-brand-border bg-brand-bgSecondary hover:border-brand-gold transition-all duration-250 hover:-translate-y-1 shadow-gold block"
+                className="group relative overflow-hidden rounded-xl border border-brand-border bg-brand-bgSecondary hover:border-brand-gold active:scale-[0.98] active:border-brand-gold transition-all duration-250 hover:-translate-y-1 shadow-gold block"
               >
                 {/* Foto */}
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -128,7 +123,7 @@ export default function HomePage() {
                     Músico
                   </h2>
                   <p className="font-sans text-brand-textSecondary mb-5">
-                    Grabaciones de vientos, arreglos, transcripciones y clases.
+                    Grabaciones de vientos, arreglos y clases de piano.
                   </p>
                   <span className="inline-flex items-center gap-1.5 text-brand-gold font-sans font-semibold text-sm group-hover:gap-3 transition-all duration-200">
                     Explorar
@@ -142,7 +137,7 @@ export default function HomePage() {
             <FadeIn delay={0.12} yOffset={24}>
               <Link
                 href="/desarrollador"
-                className="group relative overflow-hidden rounded-xl border border-brand-border bg-brand-bgSecondary hover:border-brand-gold transition-all duration-250 hover:-translate-y-1 shadow-gold block"
+                className="group relative overflow-hidden rounded-xl border border-brand-border bg-brand-bgSecondary hover:border-brand-gold active:scale-[0.98] active:border-brand-gold transition-all duration-250 hover:-translate-y-1 shadow-gold block"
               >
                 {/* Foto */}
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -262,23 +257,17 @@ export default function HomePage() {
 
               {/* Links sociales */}
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <a
-                  href={WA_GENERAL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#25D366] text-white font-sans font-semibold text-sm py-3 px-5 rounded-md hover:opacity-90 transition-opacity duration-200"
-                >
-                  <WhatsappIcon className="w-4 h-4" />
+                <WhatsAppCTA href={WA_GENERAL} className="py-3 px-5 text-sm">
                   WhatsApp
-                </a>
+                </WhatsAppCTA>
                 <a
-                  href="https://www.instagram.com/santi.rivero06/"
+                  href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 border border-brand-gold text-brand-gold font-sans font-semibold text-sm py-3 px-5 rounded-md hover:bg-brand-gold hover:text-brand-bgPrimary transition-all duration-200"
                 >
                   <InstagramIcon className="w-4 h-4" />
-                  @santi.rivero06
+                  {INSTAGRAM_HANDLE}
                 </a>
               </div>
             </div>
@@ -295,24 +284,25 @@ export default function HomePage() {
           </h2>
           <GoldDivider centered />
           <p className="font-sans text-brand-textSecondary mt-6 mb-8 max-w-xl mx-auto leading-relaxed">
-            Ya sea que necesites vientos para tu producción, una transcripción para SADAIC,
+            Ya sea que necesites vientos para tu producción,
             clases de piano o una página web — estoy acá.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href={WA_GENERAL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-bgPrimary font-sans font-semibold text-sm py-3.5 px-7 rounded-md hover:bg-brand-goldDark transition-colors duration-200"
-            >
-              <WhatsappIcon className="w-4 h-4" />
+            <WhatsAppCTA href={WA_GENERAL} variant="gold">
               Escribime por WhatsApp
-            </a>
+            </WhatsAppCTA>
             <Link
               href="/musico/grabaciones"
               className="inline-flex items-center justify-center gap-2 border border-brand-border text-brand-textSecondary font-sans font-semibold text-sm py-3.5 px-7 rounded-md hover:border-brand-gold hover:text-brand-textPrimary transition-all duration-200"
             >
               Ver grabaciones de vientos
+              <ArrowRightIcon className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/desarrollador"
+              className="inline-flex items-center justify-center gap-2 border border-brand-border text-brand-textSecondary font-sans font-semibold text-sm py-3.5 px-7 rounded-md hover:border-brand-gold hover:text-brand-textPrimary transition-all duration-200"
+            >
+              Ver proyectos de desarrollo
               <ArrowRightIcon className="w-4 h-4" />
             </Link>
           </div>

@@ -2,12 +2,18 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRightIcon } from '@/components/icons'
+import GoldDivider from '@/components/GoldDivider'
 
 export const metadata: Metadata = {
   title: 'Músico & Arreglador',
   description:
-    'Grabaciones de vientos, arreglos de brass, transcripciones para SADAIC, clases de piano y más. La música como forma de vida — desde Santa Fe, Argentina.',
+    'Grabaciones de vientos, arreglos de brass, clases de piano y más. La música como forma de vida — desde Santa Fe, Argentina.',
   alternates: { canonical: '/musico' },
+  openGraph: {
+    title: 'Músico & Arreglador | Santiago Samuel',
+    description: 'Grabaciones de vientos, arreglos de brass, clases de piano y más.',
+    images: [{ url: '/images/hero/hero-grabaciones.jpg', width: 1200, height: 630, alt: 'Santiago Samuel — Músico y Arreglador' }],
+  },
 }
 
 const servicios = [
@@ -22,23 +28,13 @@ const servicios = [
     destacado: true,
   },
   {
-    href: '/musico/transcripciones',
-    emoji: '📄',
-    badge: null,
-    titulo: 'Transcripciones para SADAIC',
-    descripcion:
-      'Registro de obras musicales en SADAIC y otros organismos internacionales. Melodía, armonía y partitura completa.',
-    imagen: '/images/hero/hero-transcripciones.jpg',
-    destacado: false,
-  },
-  {
     href: '/musico/sergiotorres',
     emoji: '🎤',
     badge: null,
     titulo: 'Sergio Torres',
     descripcion:
       'Desde agosto de 2023 soy parte de la banda de Sergio Torres, referente de la cumbia santafesina. Shows, grabaciones, kilómetros.',
-    imagen: '/images/6.jpg',
+    imagen: '/images/hero/hero-sergiotorres.jpg',
     destacado: false,
   },
   {
@@ -52,10 +48,6 @@ const servicios = [
     destacado: false,
   },
 ]
-
-function GoldDivider() {
-  return <span className="block w-14 h-0.5 bg-brand-gold mt-3" />
-}
 
 export default function MusicoPage() {
   return (
@@ -130,7 +122,7 @@ export default function MusicoPage() {
               <Link
                 key={s.href}
                 href={s.href}
-                className="group overflow-hidden rounded-xl border border-brand-border bg-brand-bgSecondary hover:border-brand-gold hover:-translate-y-1 transition-all duration-250"
+                className="group overflow-hidden rounded-xl border border-brand-border bg-brand-bgSecondary hover:border-brand-gold hover:-translate-y-1 active:scale-[0.98] active:border-brand-gold transition-all duration-250"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image

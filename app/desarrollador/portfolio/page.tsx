@@ -1,16 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { GithubIcon, LinkedinIcon, ExternalLinkIcon, ArrowRightIcon } from '@/components/icons'
+import GoldDivider from '@/components/GoldDivider'
 
 export const metadata: Metadata = {
   title: 'Portfolio Técnico — Stack, Proyectos y CV | Santiago Samuel',
   description:
     'Stack técnico completo, proyectos en producción y currículum de Santiago Samuel. Next.js, NestJS, TypeScript, PostgreSQL. Desarrollador web full-stack en Santa Fe, Argentina.',
   alternates: { canonical: '/desarrollador/portfolio' },
-}
-
-function GoldDivider({ centered = false }: { centered?: boolean }) {
-  return <span className={`block w-14 h-0.5 bg-brand-gold mt-3 ${centered ? 'mx-auto' : ''}`} />
+  openGraph: {
+    title: 'Portfolio Técnico | Santiago Samuel',
+    description: 'Stack completo, proyectos en producción y CV. Next.js, NestJS, TypeScript, PostgreSQL.',
+    images: [{ url: '/images/hero/hero-desarrollador.jpg', width: 1200, height: 630 }],
+  },
 }
 
 // ─── Stack tecnológico ─────────────────────────────────────────────────────────

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { WhatsappIcon } from '@/components/icons'
 import { WA_CLASES } from '@/lib/whatsapp'
+import GoldDivider from '@/components/GoldDivider'
+import WhatsAppCTA from '@/components/WhatsAppCTA'
 
 export const metadata: Metadata = {
   title: 'Clases de Piano Particulares en Santa Fe | Presencial y Virtual',
@@ -14,10 +15,11 @@ export const metadata: Metadata = {
     'clases de piano virtual',
   ],
   alternates: { canonical: '/musico/clases' },
-}
-
-function GoldDivider({ centered = false }: { centered?: boolean }) {
-  return <span className={`block w-14 h-0.5 bg-brand-gold mt-3 ${centered ? 'mx-auto' : ''}`} />
+  openGraph: {
+    title: 'Clases de Piano | Santiago Samuel',
+    description: 'Clases de piano presenciales en Santa Fe o virtuales. Todos los niveles.',
+    images: [{ url: '/images/hero/hero-clases.jpg', width: 1200, height: 630 }],
+  },
 }
 
 export default function ClasesPage() {
@@ -49,15 +51,9 @@ export default function ClasesPage() {
           <p className="font-sans font-light text-lg text-brand-textSecondary mt-5 mb-8 max-w-xl">
             Más de cinco años de experiencia enseñando a alumnos de distintas edades y niveles.
           </p>
-          <a
-            href={WA_CLASES}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#25D366] text-white font-sans font-semibold py-3 px-6 rounded-md hover:opacity-90 transition-opacity duration-200"
-          >
-            <WhatsappIcon className="w-5 h-5" />
+          <WhatsAppCTA href={WA_CLASES} className="py-3 px-6">
             Consultá disponibilidad por WhatsApp
-          </a>
+          </WhatsAppCTA>
         </div>
       </section>
 
@@ -121,15 +117,9 @@ export default function ClasesPage() {
             <p className="font-sans text-brand-textSecondary mt-5 mb-7 max-w-md mx-auto">
               Escribime con tus datos, tu nivel aproximado y si preferís presencial o virtual, y coordinamos el primer encuentro.
             </p>
-            <a
-              href={WA_CLASES}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] text-white font-sans font-semibold py-3.5 px-7 rounded-md hover:opacity-90 transition-opacity duration-200"
-            >
-              <WhatsappIcon className="w-5 h-5" />
+            <WhatsAppCTA href={WA_CLASES}>
               Consultá disponibilidad por WhatsApp
-            </a>
+            </WhatsAppCTA>
           </div>
         </div>
       </section>

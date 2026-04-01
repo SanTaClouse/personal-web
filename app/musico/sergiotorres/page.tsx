@@ -2,16 +2,18 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { InstagramIcon, ExternalLinkIcon } from '@/components/icons'
+import GoldDivider from '@/components/GoldDivider'
 
 export const metadata: Metadata = {
   title: 'Sergio Torres — Músico de la Banda',
   description:
     'Desde agosto de 2023 formo parte de la banda de Sergio Torres, referente de la cumbia santafesina. Shows, grabaciones y giras por todo el país.',
   alternates: { canonical: '/musico/sergiotorres' },
-}
-
-function GoldDivider() {
-  return <span className="block w-14 h-0.5 bg-brand-gold mt-3" />
+  openGraph: {
+    title: 'Sergio Torres | Santiago Samuel',
+    description: 'Trombonista de la banda de Sergio Torres, referente de la cumbia santafesina.',
+    images: [{ url: '/images/hero/hero-sergiotorres.jpg', width: 1200, height: 630 }],
+  },
 }
 
 export default function SergioTorresPage() {

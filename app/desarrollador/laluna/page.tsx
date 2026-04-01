@@ -2,16 +2,19 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ExternalLinkIcon } from '@/components/icons'
+import GoldDivider from '@/components/GoldDivider'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'La Luna — Sistema de Gestión + Web Institucional | Santiago Samuel',
   description:
     'Plataforma completa para La Luna: sitio web institucional con SEO local + backoffice administrativo para gestión de pedidos, clientes y stock. React, NestJS, PostgreSQL.',
   alternates: { canonical: '/desarrollador/laluna' },
-}
-
-function GoldDivider() {
-  return <span className="block w-14 h-0.5 bg-brand-gold mt-3" />
+  openGraph: {
+    title: 'La Luna — Case Study | Santiago Samuel',
+    description: 'Web institucional SEO + backoffice administrativo: pedidos, clientes y stock.',
+    images: [{ url: '/images/projects/laluna-preview.jpg', width: 1200, height: 630 }],
+  },
 }
 
 function FeatureCard({ icon, titulo, desc }: { icon: string; titulo: string; desc: string }) {
@@ -59,12 +62,11 @@ export default function LaLunaPage() {
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="bg-brand-bgSecondary border-b border-brand-border pt-28 pb-14 md:pt-36 md:pb-20">
         <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12">
-          <Link
-            href="/desarrollador"
-            className="inline-flex items-center gap-1.5 text-brand-textSecondary text-sm font-sans mb-6 hover:text-brand-textPrimary transition-colors duration-150"
-          >
-            ← Desarrollador
-          </Link>
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/' },
+            { label: 'Desarrollador', href: '/desarrollador' },
+            { label: 'La Luna' },
+          ]} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>
