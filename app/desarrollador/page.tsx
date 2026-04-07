@@ -212,7 +212,7 @@ export default function DesarrolladorPage() {
         {/* Decoración: snippet de código en background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden>
           <pre className="absolute top-8 right-0 font-mono-brand text-[11px] text-brand-gold/[0.07] leading-relaxed pr-8 text-right whitespace-pre">
-{`const santiago = {
+            {`const santiago = {
   stack: ['Next.js', 'NestJS', 'TypeScript'],
   db: 'PostgreSQL',
   deploy: ['Vercel', 'Render', 'Railway'],
@@ -231,8 +231,8 @@ async function construir(proyecto) {
         <div className="relative z-10 w-full max-w-content mx-auto px-5 md:px-8 lg:px-12">
           <span className="badge mb-5 inline-block">Desarrollador</span>
           <h1 className="font-playfair text-4xl sm:text-5xl md:text-6xl font-bold text-brand-textPrimary leading-tight mb-3 max-w-3xl">
-            También desarrollo páginas web.{' '}
-            <span className="text-brand-gold">Y no, no es casualidad.</span>
+            También desarrollo {' '}
+            <span className="text-brand-gold">paginas webs.</span>
           </h1>
           <GoldDivider />
           <p className="font-sans font-light text-lg text-brand-textSecondary mt-5 max-w-xl mb-8">
@@ -261,7 +261,7 @@ async function construir(proyecto) {
         <div className="max-w-content mx-auto px-5 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <div className="mb-8">
-              <span className="badge">La historia</span>
+              <span className="badge">La historia personal </span>
               <GoldDivider />
             </div>
             <div className="space-y-4 font-sans text-brand-textSecondary leading-relaxed text-[1.0625rem]">
@@ -297,10 +297,10 @@ async function construir(proyecto) {
                 Lo que más me motiva es construir sistemas administrativos a medida para empresas
                 — ese punto donde la tecnología se cruza con un modelo de negocio concreto y le
                 cambia el día a día a alguien real. Ahorro de tiempo, menos errores, más control.
-                Eso es lo que me mueve.
+
               </p>
               <p className="text-brand-gold font-medium">
-                Y sí — esta página la hice yo mismo.
+                Me motiva crear soluciones.
               </p>
             </div>
           </div>

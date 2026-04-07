@@ -219,15 +219,14 @@ export default function HomePage() {
               <div className="mt-6 space-y-4 font-sans text-brand-textSecondary leading-relaxed text-[1.0625rem]">
                 <p>
                   Hace doce años, jugando con un programa de piano en la computadora, me compré
-                  mi primer teclado. Sin saber muy bien para dónde iba eso. Al poco tiempo me empezaron a llamar para tocar cumbia santafesina — la música que se vive y se respira
-                  en Santa Fe — y desde ese momento no paré más. Tuve el placer de trabajar con bandas y
+                  mi primer teclado. Sin saber muy bien para dónde iba eso. Al poco tiempo me empezaron a llamar para tocar cumbia santafesina — la música que se vive
+                  en cada barrio de Santa Fe — y desde ese momento no paré más. Tuve el placer de trabajar con bandas y
                   artistas que marcaron la región: Grupo Cali, Nico Mattioli y Juanjo Piedrabuena, entre otros.
                 </p>
                 <p>
                   En paralelo, estudié piano en el Liceo Municipal, después entré al Instituto Superior de Música,
                   y finalmente me recibí como Licenciado en Sonorización y Grabación en la Universidad Nacional
-                  del Litoral. Mientras tanto, daba clases de piano. La música era lo único me nacía hacer,
-                  y lo hacía bien.
+                  del Litoral. Mientras tanto, daba clases de piano.
                 </p>
                 <p className="text-brand-textPrimary font-medium">
                   Y entonces apareció el trombón.
@@ -237,7 +236,7 @@ export default function HomePage() {
                   anoté en la carrera de Trombón del Liceo Municipal antes de haberlo tocado siquiera una vez.
                   Los primeros seis meses practiqué solo con la boquilla. Después decidí complementar esa
                   formación estudiando por mi cuenta — y me convertí en un autodidacta convencido de que cuando
-                  algo te apasiona de verdad, encontrás la manera.
+                  algo te gusta de verdad, encontrás la manera.
                 </p>
                 <p>
                   Hoy vivo de la música. Formo parte de la banda de{' '}
@@ -250,7 +249,7 @@ export default function HomePage() {
                 <p>
                   Además de la música, en 2025 hice algo que no me esperaba: un curso de desarrollo web que me
                   abrió un mundo nuevo. Esa misma curiosidad que me metió en el trombón me llevó a crear páginas
-                  y sistemas reales para negocios reales. ¿Querés ver lo que hice?{' '}
+                  y sistemas  para negocios reales. ¿Querés ver lo que hice?{' '}
                   <span className="text-brand-textPrimary">Esta página la hice yo mismo.</span>
                 </p>
               </div>
