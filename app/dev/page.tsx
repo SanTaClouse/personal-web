@@ -11,7 +11,7 @@ const TELEPROMPTER_DIM_OPACITY = 0.4
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
-type ProjectId = "tr1bu" | "liftmanager" | "laluna" | "immaculate" | "eleven" | "quintal"
+type ProjectId = "reportemedico" | "tr1bu" | "liftmanager" | "laluna" | "immaculate" | "eleven" | "quintal"
 
 type Project = {
     title: string
@@ -37,16 +37,25 @@ type Service = {
 const PROJECTS: Record<ProjectId, Project> = {
     tr1bu: {
         title: "TR1BU",
-        type: "Portfolio web · Artista",
+        type: "Portfolio Web · Artista",
         desc: "Sitio bilingüe para artista con integración de Spotify, YouTube y SoundCloud",
         href: "/desarrollador/tr1bu",
         live: "https://tr1bu.com",
     },
 
+    reportemedico: {
+        title: "Reporte Médico",
+        type: "Portal de salud · Full Stack",
+        desc: "Plataforma de salud líder en República Dominicana — rediseño completo de WordPress a Next.js 14 + NestJS + CMS propio",
+        href: "",
+        live: "https://reportemedico.com",
+    },
+
+
     liftmanager: {
         title: "LiftManager",
         type: "SaaS B2B · Plataforma",
-        desc: "Plataforma para empresas que automatiza atención con QR, autoservicio y facturación ARCA",
+        desc: "Plataforma para empresas que agaliza el flujo de trabajo con QR, autoservicio y facturación ARCA",
         href: "/desarrollador/liftmanager",
         live: "https://www.liftmanager.app/",
     },
@@ -54,7 +63,7 @@ const PROJECTS: Record<ProjectId, Project> = {
     laluna: {
         title: "La Luna",
         type: "Web + Sistema de gestión",
-        desc: "Web optimizada para SEO con sistema interno de pedidos, clientes, stock y estadísticas",
+        desc: "Web de visibilidad y validación profesional con sistema interno de pedidos, clientes, stock y estadísticas",
         href: "/desarrollador/laluna",
         live: "https://laluna123.vercel.app/",
     },
@@ -62,7 +71,7 @@ const PROJECTS: Record<ProjectId, Project> = {
     immaculate: {
         title: "Immaculate Pro Painting",
         type: "Landing page · Conversión",
-        desc: "Landing de alta conversión para empresa de pintura EEUU orientada a captar clientes",
+        desc: "Página de alta conversión para empresa de pintura EEUU orientada a captar clientes",
         href: "/desarrollador/immaculate",
         live: "https://project-eiq6t.vercel.app/",
     },
@@ -70,15 +79,15 @@ const PROJECTS: Record<ProjectId, Project> = {
     eleven: {
         title: "Eleven Ascensores",
         type: "SaaS · Web + Admin",
-        desc: "Sistema con dashboard, facturación ARCA y portal técnico con acceso por QR",
+        desc: "Sistema de gestion de ordenes de trabajo con dashboard, facturación ARCA y portal técnico con acceso por QR",
         href: "/desarrollador/eleven",
-        live: null,
+        live: "https://eleven-ascensores.vercel.app/",
     },
 
     quintal: {
         title: "Quintal",
         type: "Catálogo interactivo",
-        desc: "Catálogo con precios dinámicos y pedidos automáticos vía WhatsApp",
+        desc: "La opcion economica para vender desde la web. Catálogo con precios dinámicos y pedidos automáticos vía WhatsApp",
         href: "/desarrollador/quintal",
         live: "https://quintal-demo-spa.vercel.app/",
     },
@@ -103,7 +112,7 @@ const SERVICES: Service[] = [
             "Tu negocio visible en Google desde el día 1",
         ],
         color: "#3B82F6",
-        projects: ["immaculate", "laluna", "tr1bu"],
+        projects: ["immaculate", "laluna", "tr1bu", "quintal"],
         waMessage:
             "Hola Santiago! Estuve viendo tu página y algunos proyectos. Te escribo porque quiero más información sobre una web profesional para mi negocio.",
     },
@@ -128,7 +137,7 @@ const SERVICES: Service[] = [
             "Datos en tiempo real para tomar decisiones",
         ],
         color: "#10B981",
-        projects: ["eleven", "liftmanager", "quintal"],
+        projects: ["eleven", "liftmanager", "immaculate"],
         waMessage:
             "Hola Santiago! Estuve viendo tu página y algunos proyectos. Te escribo porque me interesa un sistema administrativo a medida para mi empresa.",
     },
@@ -155,7 +164,7 @@ const SERVICES: Service[] = [
             "Arquitectura que crece con tu contenido",
         ],
         color: "#F59E0B",
-        projects: ["liftmanager", "quintal"],
+        projects: ["reportemedico", "liftmanager", "quintal"],
         waMessage:
             "Hola Santiago! Estuve viendo tu página y algunos proyectos. Te escribo porque necesito una plataforma o portal para mi proyecto.",
     },
@@ -453,7 +462,7 @@ function OverlayCTA({ serviceId, onClose }: { serviceId: string; onClose: () => 
                                 {project.desc}
                             </p>
                             <div className="flex gap-4">
-                                <Link
+                                {/* <Link
                                     href={project.href}
                                     onClick={handleClose}
                                     className="text-xs font-medium"
@@ -468,7 +477,7 @@ function OverlayCTA({ serviceId, onClose }: { serviceId: string; onClose: () => 
                                     onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
                                 >
                                     Ver case study →
-                                </Link>
+                                </Link> */}
                                 {project.live && (
                                     <a
                                         href={project.live}
@@ -676,15 +685,25 @@ function ScrollIndicator() {
 export default function PortfolioLanding() {
     const [selectedService, setSelectedService] = useState<string | null>(null)
     const [heroLoaded, setHeroLoaded] = useState(false)
+    const [cardsReady, setCardsReady] = useState(false)
+    const [differentReady, setDifferentReady] = useState(false)
     const teleprompterRef = useRef<HTMLElement | null>(null)
-    const cardsRef = useRef<HTMLElement | null>(null)
     const teleprompterVisible = useInView(teleprompterRef, { threshold: 0.2 })
-    const cardsVisible = useInView(cardsRef, { threshold: 0.1 })
 
     useEffect(() => {
         const t = setTimeout(() => setHeroLoaded(true), 200)
         return () => clearTimeout(t)
     }, [])
+
+    useEffect(() => {
+        if (!teleprompterVisible) return
+        // "Seleccioná lo más parecido a tu negocio" aparece a los 2200ms
+        // Cards aparecen 800ms después de eso → 3000ms
+        // "¿Tu proyecto es diferente?" aparece 3s después de las cards → 6000ms
+        const t1 = setTimeout(() => setCardsReady(true), 3000)
+        const t2 = setTimeout(() => setDifferentReady(true), 6000)
+        return () => { clearTimeout(t1); clearTimeout(t2) }
+    }, [teleprompterVisible])
 
     const waGeneral = whatsappLink(
         "Hola Santiago! Estuve viendo tu página. Te escribo porque tengo un proyecto diferente y quiero contarte de qué se trata."
@@ -898,7 +917,7 @@ export default function PortfolioLanding() {
                 </section>
 
                 {/* ── CARDS ─────────────────────────────────────────────────── */}
-                <section ref={cardsRef} className="relative px-0 md:px-6 pb-32 pt-8">
+                <section className="relative px-0 md:px-6 pb-32 pt-8">
                     <div className="max-w-5xl mx-auto">
                         <div className="cards-scroll">
                             {SERVICES.map((service, i) => (
@@ -907,7 +926,7 @@ export default function PortfolioLanding() {
                                     service={service}
                                     index={i}
                                     onSelect={setSelectedService}
-                                    isVisible={cardsVisible}
+                                    isVisible={cardsReady}
                                 />
                             ))}
                         </div>
@@ -916,9 +935,9 @@ export default function PortfolioLanding() {
                         <div
                             className="mt-12 text-center"
                             style={{
-                                opacity: cardsVisible ? 1 : 0,
-                                transform: cardsVisible ? "translateY(0)" : "translateY(20px)",
-                                transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1200ms",
+                                opacity: differentReady ? 1 : 0,
+                                transform: differentReady ? "translateY(0)" : "translateY(20px)",
+                                transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
                             }}
                         >
                             <a
