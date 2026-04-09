@@ -19,6 +19,7 @@ type Project = {
     desc: string
     href: string
     live: string | null
+    featured?: boolean
 }
 
 type Service = {
@@ -55,6 +56,7 @@ const PROJECTS: Record<ProjectId, Project> = {
         desc: "Plataforma de salud líder en República Dominicana — rediseño completo de WordPress a Next.js 14 + NestJS + CMS propio",
         href: "",
         live: "https://reportemedico.com",
+        featured: true,
     },
 
 
@@ -113,12 +115,12 @@ const SERVICES: Service[] = [
         cta: "Tengo un negocio",
         subtitle: "Y quiero una web profesional que venda",
         features: [
-            "Clientes que duplicaron consultas en 30 días",
-            "Diseño que transmite confianza al instante",
-            "Tu negocio visible en Google desde el día 1",
+            "Clientes que duplicaron consultas",
+            "Diseño que transmite confianza y profesionalismo",
+            "Tu negocio visible en Google",
         ],
         color: "#3B82F6",
-        projects: ["immaculate", "laluna", "tr1bu", "quintal"],
+        projects: ["immaculate", "laluna", "quintal"],
         waMessage:
             "Hola Santiago! Estuve viendo tu página y algunos proyectos. Te escribo porque quiero más información sobre una web profesional para mi negocio.",
     },
@@ -143,7 +145,7 @@ const SERVICES: Service[] = [
             "Datos en tiempo real para tomar decisiones",
         ],
         color: "#10B981",
-        projects: ["eleven", "liftmanager", "immaculate"],
+        projects: ["eleven", "liftmanager", "laluna"],
         waMessage:
             "Hola Santiago! Estuve viendo tu página y algunos proyectos. Te escribo porque me interesa un sistema administrativo a medida para mi empresa.",
     },
@@ -178,10 +180,13 @@ const SERVICES: Service[] = [
         id: "artista",
         icon: (
             <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10">
-                <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="2" />
-                <path d="M16 28C18 24 30 24 32 28" stroke="currentColor" strokeWidth="2" />
-                <circle cx="18" cy="20" r="2" fill="currentColor" />
-                <circle cx="30" cy="20" r="2" fill="currentColor" />
+                <path
+                    d="M8 28C14 12 22 36 28 20C32 12 36 28 40 18"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
             </svg>
         ),
         cta: "Soy artista",
@@ -454,7 +459,7 @@ function OverlayCTA({ serviceId, onClose }: { serviceId: string; onClose: () => 
                         className="text-sm ml-11"
                         style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.35)" }}
                     >
-                        Algunos proyectos que hice para negocios como el tuyo
+                        Algunos proyectos relacionados
                     </p>
                 </div>
 
@@ -467,8 +472,22 @@ function OverlayCTA({ serviceId, onClose }: { serviceId: string; onClose: () => 
                         <div
                             key={project.title}
                             className="rounded-xl p-4"
-                            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }}
+                            style={{
+                                background: project.featured ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.03)",
+                                border: project.featured ? `1px solid ${data.color}20` : "1px solid rgba(255,255,255,0.05)",
+                            }}
                         >
+                            {project.featured && (
+                                <div
+                                    className="flex items-center gap-1.5 mb-2"
+                                    style={{ color: "#F59E0B", fontFamily: "'DM Sans', sans-serif", fontSize: "0.65rem", letterSpacing: "0.05em", textTransform: "uppercase" }}
+                                >
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                    </svg>
+                                    Proyecto destacado
+                                </div>
+                            )}
                             <div className="flex flex-wrap items-center gap-2 mb-1">
                                 <span
                                     className="font-semibold text-sm"
@@ -549,7 +568,7 @@ function OverlayCTA({ serviceId, onClose }: { serviceId: string; onClose: () => 
                         onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#25D366")}
                     >
                         <WhatsAppIcon />
-                        Quiero algo así para mi negocio
+                        Quiero algo similar a esto
                     </a>
                     <p
                         className="text-center text-xs mt-2.5"
@@ -769,10 +788,10 @@ export default function PortfolioLanding() {
           inset: -50%;
           width: 200%;
           height: 200%;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
           pointer-events: none;
           z-index: 100;
-          animation: grain 6s steps(10) infinite;
+          animation: grain 8s steps(6) infinite;
         }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -801,15 +820,28 @@ export default function PortfolioLanding() {
           }
           .cards-scroll > * { flex: unset; }
         }
+        .dot-grid {
+          background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+          background-size: 32px 32px;
+        }
+        .vignette::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 1;
+          background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(0,0,0,0.4) 100%);
+        }
       `}</style>
 
             <div
-                className="grain"
+                className="grain dot-grid vignette"
                 style={{
                     minHeight: "100vh",
-                    background: "linear-gradient(165deg, #0a0a0f 0%, #0d0d14 40%, #0f0e17 70%, #0a0a0f 100%)",
+                    background: "linear-gradient(165deg, #08080c 0%, #0a0a12 30%, #0c0b15 60%, #08080c 100%)",
                     color: "#fff",
                     overflowX: "hidden",
+                    position: "relative",
                 }}
             >
                 {/* ── HERO ──────────────────────────────────────────────────── */}
@@ -817,16 +849,29 @@ export default function PortfolioLanding() {
                     className="relative flex flex-col items-center justify-center px-6 text-center"
                     style={{ minHeight: "100vh" }}
                 >
+                    {/* Ambient orbs */}
                     <div
                         className="absolute pointer-events-none"
                         style={{
-                            width: "600px",
-                            height: "600px",
-                            top: "20%",
+                            width: "700px",
+                            height: "700px",
+                            top: "15%",
                             left: "50%",
                             transform: "translateX(-50%)",
-                            background: "radial-gradient(ellipse, rgba(59,130,246,0.06) 0%, transparent 70%)",
-                            filter: "blur(60px)",
+                            background: "radial-gradient(ellipse, rgba(59,130,246,0.05) 0%, transparent 65%)",
+                            filter: "blur(80px)",
+                        }}
+                    />
+                    <div
+                        className="absolute pointer-events-none"
+                        style={{
+                            width: "400px",
+                            height: "400px",
+                            top: "35%",
+                            left: "20%",
+                            transform: "translateX(-50%)",
+                            background: "radial-gradient(ellipse, rgba(16,185,129,0.03) 0%, transparent 70%)",
+                            filter: "blur(70px)",
                         }}
                     />
 
@@ -946,7 +991,30 @@ export default function PortfolioLanding() {
 
                 {/* ── CARDS ─────────────────────────────────────────────────── */}
                 <section className="relative px-0 md:px-6 pb-32 pt-8">
-                    <div className="max-w-5xl mx-auto">
+                    {/* Ambient orbs behind cards */}
+                    <div
+                        className="absolute pointer-events-none"
+                        style={{
+                            width: "500px",
+                            height: "500px",
+                            top: "-10%",
+                            right: "-5%",
+                            background: "radial-gradient(ellipse, rgba(139,92,246,0.04) 0%, transparent 70%)",
+                            filter: "blur(80px)",
+                        }}
+                    />
+                    <div
+                        className="absolute pointer-events-none"
+                        style={{
+                            width: "500px",
+                            height: "500px",
+                            bottom: "0%",
+                            left: "-5%",
+                            background: "radial-gradient(ellipse, rgba(245,158,11,0.03) 0%, transparent 70%)",
+                            filter: "blur(80px)",
+                        }}
+                    />
+                    <div className="max-w-5xl mx-auto relative z-10">
                         <div className="cards-scroll">
                             {SERVICES.map((service, i) => (
                                 <ServiceCard
