@@ -11,7 +11,7 @@ const TELEPROMPTER_DIM_OPACITY = 0.4
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
-type ProjectId = "reportemedico" | "tr1bu" | "liftmanager" | "laluna" | "immaculate" | "eleven" | "quintal"
+type ProjectId = "albertofonseca" | "reportemedico" | "tr1bu" | "liftmanager" | "laluna" | "immaculate" | "eleven" | "quintal"
 
 type Project = {
     title: string
@@ -42,7 +42,13 @@ const PROJECTS: Record<ProjectId, Project> = {
         href: "/desarrollador/tr1bu",
         live: "https://tr1bu.com",
     },
-
+    albertofonseca: {
+        title: "Alberto Fonseca",
+        type: "Sitio Web · Artista",
+        desc: "Sitio web para artista con integración de Spotify, YouTube ",
+        href: "",
+        live: "https://albertofonseca.net/",
+    },
     reportemedico: {
         title: "Reporte Médico",
         type: "Portal de salud · Full Stack",
@@ -167,6 +173,28 @@ const SERVICES: Service[] = [
         projects: ["reportemedico", "liftmanager", "quintal"],
         waMessage:
             "Hola Santiago! Estuve viendo tu página y algunos proyectos. Te escribo porque necesito una plataforma o portal para mi proyecto.",
+    },
+    {
+        id: "artista",
+        icon: (
+            <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10">
+                <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="2" />
+                <path d="M16 28C18 24 30 24 32 28" stroke="currentColor" strokeWidth="2" />
+                <circle cx="18" cy="20" r="2" fill="currentColor" />
+                <circle cx="30" cy="20" r="2" fill="currentColor" />
+            </svg>
+        ),
+        cta: "Soy artista",
+        subtitle: "Y necesito una web que represente mi obra",
+        features: [
+            "Un portfolio visual que eleva tu identidad artística",
+            "Un espacio propio donde tu obra no depende de algoritmos",
+            "Más oportunidades: shows, clientes y colaboraciones",
+        ],
+        color: "#8B5CF6",
+        projects: ["tr1bu", "albertofonseca"],
+        waMessage:
+            "Hola Santiago! Soy artista y quiero una web profesional para mostrar mi trabajo y generar más oportunidades.",
     },
 ]
 
@@ -766,8 +794,8 @@ export default function PortfolioLanding() {
         @media (min-width: 768px) {
           .cards-scroll {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
             overflow: visible;
             padding: 0;
           }

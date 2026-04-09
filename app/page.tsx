@@ -67,11 +67,11 @@ export default function HomePage() {
 
             <p className="font-playfair text-xl sm:text-2xl md:text-3xl font-semibold text-brand-textPrimary mt-5 mb-3 max-w-2xl leading-snug">
               Músico trombonista.{' '}
-              <span className="text-brand-gold">Y sí, también desarrollo páginas web.</span>
+              <span className="text-brand-gold">Desarrollador web full stack</span>
             </p>
 
             <p className="font-sans font-light text-lg text-brand-textSecondary mb-8 max-w-lg">
-              Doce años haciendo música en serio. Curioso de todo desde siempre.
+              Doce años trabajando de la música. Curioso de todo desde siempre.
             </p>
 
             <a
