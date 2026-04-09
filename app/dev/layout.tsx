@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Santiago Samuel — Aplicaciones y páginas web',
-  description: 'Mirá algunos proyectos y contame qué necesitás.',
+  description: 'Mirá algunos proyectos en mi portfolio.',
   alternates: { canonical: '/dev' },
   openGraph: {
     title: 'Santiago Samuel — Aplicaciones y páginas web',
-    description: 'Mirá algunos proyectos y contame qué necesitás.',
+    description: 'Mirá algunos proyectos en mi portafolio.',
     url: 'https://santiagosamuel.com/dev',
   },
 }
